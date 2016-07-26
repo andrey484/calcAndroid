@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         zero.setOnClickListener(v -> textInput("0"));
         point.setOnClickListener(v -> textInput("."));
         mool.setOnClickListener(v -> textInput("*"));
+        //
         seven.setOnClickListener(v -> textInput("7"));
         eight.setOnClickListener(v -> textInput("8"));
         nine.setOnClickListener(v -> textInput("9"));
