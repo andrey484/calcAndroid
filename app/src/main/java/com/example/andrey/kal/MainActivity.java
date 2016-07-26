@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
+//
     private void parseSc() {
         for(int i = 0;i<expressionString.length();i++){
             
