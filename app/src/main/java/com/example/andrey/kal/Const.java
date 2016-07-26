@@ -6,5 +6,5 @@ package com.example.andrey.kal;
 public class Const {
 
     public static final String MINUS = "-";
-
+    public static final String  POINT = ".";
 }

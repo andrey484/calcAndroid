@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button plus;
     private Button equal;
     private TextView result;
-
+    private boolean checkPoint = false;
     private String expressionString = "";
 
     private ArrayList<String> expression = new ArrayList<>();
@@ -95,43 +95,43 @@ public class MainActivity extends AppCompatActivity {
 
     public void textInput(String symbol) {
         expressionString = "";
+                for (int i = 0; i < constSymbol.length; i++) {
+                    if (symbol.equals(constSymbol[i])) {
+                        if (expression.size() < 1) {
+                            return;
+                        } else {
+                            if (check(expression.get(expression.size() - 1)) || expression.get(expression.size() - 1).equals(MINUS))
+                                return;
 
-        for(int i = 0;i<constSymbol.length;i++){
-            if(symbol.equals(constSymbol[i])){
-                if(expression.size()<1){
-                    return;
-                } else {
-                    if(check(expression.get(expression.size()-1))||expression.get(expression.size()-1).equals(MINUS))
-                        return;
+                        }
 
+                    }
+                    if (symbol.equals(MINUS)) {
+                        if (expression.size() == 0) {
+                            expression.add(MINUS);
+                            return;
+                        }
+                        try {
+                            if (expression.get(expression.size() - 2).equals(MINUS) && expression.get(expression.size() - 1).equals(MINUS) || check(expression.get(expression.size() - 2)))
+                                return;
+                        } catch (Exception e) {
+
+                        }
+                    }
                 }
 
-           }
-            if(symbol.equals(MINUS)){
-                if(expression.size()==0) {
-                    expression.add(MINUS);
-                    return;
-                }
-                try {
-                    if (expression.get(expression.size() - 2).equals(MINUS) && expression.get(expression.size() - 1).equals(MINUS) || check(expression.get(expression.size() - 2)))
-                        return;
-                }
-                catch (Exception e){
+                expression.add(symbol);
 
-                }
-            }
-        }
-        expression.add(symbol);
 
-        if(expression.size() != 0){
-            for(int i = 0; i < expression.size(); ++i)
+        if (expression.size() != 0) {
+            for (int i = 0; i < expression.size(); ++i)
                 expressionString += expression.get(i);
 
         }
 
         result.setText(expressionString);
-
     }
+
 
     public boolean check(String symbol){
         for(int i =0;i<constSymbol.length;i++){
