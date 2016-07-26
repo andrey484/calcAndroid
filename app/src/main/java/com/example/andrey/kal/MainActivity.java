@@ -97,32 +97,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void textInput(String symbol) {
         expressionString = "";
-                for (int i = 0; i < constSymbol.length; i++) {
-                    if (symbol.equals(constSymbol[i])) {
-                        if (expression.size() < 1) {
-                            return;
-                        } else {
-                            if (check(expression.get(expression.size() - 1)) || expression.get(expression.size() - 1).equals(MINUS))
-                                return;
+        for (int i = 0; i < constSymbol.length; i++) {
+            if (symbol.equals(constSymbol[i])) {
+                if (expression.size() < 1) {
+                    return;
+                } else {
+                    if (check(expression.get(expression.size() - 1)) || expression.get(expression.size() - 1).equals(MINUS))
+                        return;
 
-                        }
-
-                    }
-                    if (symbol.equals(MINUS)) {
-                        if (expression.size() == 0) {
-                            expression.add(MINUS);
-                            return;
-                        }
-                        try {
-                            if (expression.get(expression.size() - 2).equals(MINUS) && expression.get(expression.size() - 1).equals(MINUS) || check(expression.get(expression.size() - 2)))
-                                return;
-                        } catch (Exception e) {
-
-                        }
-                    }
                 }
 
-                expression.add(symbol);
+            }
+            if (symbol.equals(MINUS)) {
+                if (expression.size() == 0) {
+                    expression.add(MINUS);
+                    return;
+                }
+                try {
+                    if (expression.get(expression.size() - 2).equals(MINUS) && expression.get(expression.size() - 1).equals(MINUS) || check(expression.get(expression.size() - 2)))
+                        return;
+                } catch (Exception e) {
+
+                }
+            }
+        }
+
+        expression.add(symbol);
 
 
         if (expression.size() != 0) {
