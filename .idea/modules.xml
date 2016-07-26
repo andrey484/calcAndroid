@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Kal.iml" filepath="$PROJECT_DIR$/Kal.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/calcAndroid.iml" filepath="$PROJECT_DIR$/calcAndroid.iml" />
     </modules>
   </component>
 </project>

@@ -94,30 +94,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void textInput(String symbol) {
-        expressionString="";
+        expressionString = "";
 
-        for (int i = 0; i < constSymbol.length; i++) {
-            if (expression.size() == 0 && expression.equals(constSymbol[i])) {
-                return;
+        for(int i = 0;i<constSymbol.length;i++){
+            if(symbol.equals(constSymbol[i])){
+                if(expression.size()<1){
+                    return;
+                } else {
+                    if(check(expression.get(expression.size()-1))||expression.get(expression.size()-1).equals(MINUS))
+                        return;
+
+                }
+
+           }
+            if(symbol.equals(MINUS)){
+                if(expression.size()==0) {
+                    expression.add(MINUS);
+                    return;
+                }
+                try {
+                    if (expression.get(expression.size() - 2).equals(MINUS) && expression.get(expression.size() - 1).equals(MINUS) || check(expression.get(expression.size() - 2)))
+                        return;
+                }
+                catch (Exception e){
+
+                }
             }
         }
         expression.add(symbol);
-        for (int i = 0; i < constSymbol.length; i++) {
-            if (expression.get(expression.size() - 1).equals(constSymbol[i])&&expression.get(expression.size() - 2).equals(constSymbol[i]))
-                expression.remove(expression.size()-1);
-        }
-        if(expression.size()>3 && expression.get(expression.size()-3).equals(MINUS)
-                && expression.get(expression.size()-2).equals(MINUS) && symbol.equals(MINUS)){
-            expression.remove(expression.get(expression.size()-1));
-        }
+
         if(expression.size() != 0){
             for(int i = 0; i < expression.size(); ++i)
                 expressionString += expression.get(i);
 
         }
+
         result.setText(expressionString);
 
     }
 
+    public boolean check(String symbol){
+        for(int i =0;i<constSymbol.length;i++){
+            if(symbol.equals(constSymbol[i]))
+                return true;
+
+        }
+        return false;
+    }
 
 }
