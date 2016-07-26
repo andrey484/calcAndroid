@@ -1,0 +1,123 @@
+package com.example.andrey.kal;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import static com.example.andrey.kal.Const.*;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button erase;
+    private Button zero;
+    private Button point;
+    private Button mool;
+    private Button seven;
+    private Button eight;
+    private Button nine;
+    private Button div;
+    private Button four;
+    private Button five;
+    private Button six;
+    private Button minus;
+    private Button one;
+    private Button two;
+    private Button three;
+    private Button plus;
+    private Button equal;
+    private TextView result;
+
+    private String expressionString = "";
+
+    private ArrayList<String> expression = new ArrayList<>();
+
+    private final String[] constSymbol = new String[]{"+", "*", "/"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        init();
+        clickListener();
+    }
+
+    public void init() {
+        erase = (Button) findViewById(R.id.erase);
+        zero = (Button) findViewById(R.id.zero);
+        point = (Button) findViewById(R.id.point);
+        mool = (Button) findViewById(R.id.mool);
+        seven = (Button) findViewById(R.id.seven);
+        eight = (Button) findViewById(R.id.eight);
+        nine = (Button) findViewById(R.id.nine);
+        div = (Button) findViewById(R.id.div);
+        four = (Button) findViewById(R.id.four);
+        five = (Button) findViewById(R.id.five);
+        six = (Button) findViewById(R.id.six);
+        minus = (Button) findViewById(R.id.minus);
+        one = (Button) findViewById(R.id.one);
+        two = (Button) findViewById(R.id.two);
+        three = (Button) findViewById(R.id.three);
+        plus = (Button) findViewById(R.id.plus);
+        equal = (Button) findViewById(R.id.equal);
+        result = (TextView) findViewById(R.id.result);
+    }
+
+    public void clickListener() {
+        erase.setOnClickListener(v -> erase());
+        zero.setOnClickListener(v -> textInput("0"));
+        point.setOnClickListener(v -> textInput("."));
+        mool.setOnClickListener(v -> textInput("*"));
+        seven.setOnClickListener(v -> textInput("7"));
+        eight.setOnClickListener(v -> textInput("8"));
+        nine.setOnClickListener(v -> textInput("9"));
+        div.setOnClickListener(v -> textInput("/"));
+        four.setOnClickListener(v -> textInput("4"));
+        five.setOnClickListener(v -> textInput("5"));
+        six.setOnClickListener(v -> textInput("6"));
+        minus.setOnClickListener(v -> textInput("-"));
+        one.setOnClickListener(v -> textInput("1"));
+        two.setOnClickListener(v -> textInput("2"));
+        three.setOnClickListener(v -> textInput("3"));
+        plus.setOnClickListener(v -> textInput("+"));
+        equal.setOnClickListener(v -> equal());
+    }
+
+    public void erase() {
+        expression.remove(expression.size() - 1);
+    }
+
+    public void equal() {
+
+    }
+
+    public void textInput(String symbol) {
+        expressionString="";
+
+        for (int i = 0; i < constSymbol.length; i++) {
+            if (expression.size() == 0 && expression.equals(constSymbol[i])) {
+                return;
+            }
+        }
+        expression.add(symbol);
+        for (int i = 0; i < constSymbol.length; i++) {
+            if (expression.get(expression.size() - 1).equals(constSymbol[i])&&expression.get(expression.size() - 2).equals(constSymbol[i]))
+                expression.remove(expression.size()-1);
+        }
+        if(expression.size()>3 && expression.get(expression.size()-3).equals(MINUS)
+                && expression.get(expression.size()-2).equals(MINUS) && symbol.equals(MINUS)){
+            expression.remove(expression.get(expression.size()-1));
+        }
+        if(expression.size() != 0){
+            for(int i = 0; i < expression.size(); ++i)
+                expressionString += expression.get(i);
+
+        }
+        result.setText(expressionString);
+
+    }
+
+
+}
