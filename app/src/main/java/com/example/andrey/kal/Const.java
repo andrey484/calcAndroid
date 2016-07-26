@@ -7,4 +7,5 @@ public class Const {
 
     public static final String MINUS = "-";
     public static final String  POINT = ".";
+    public static final String PLUS = "+";
 }

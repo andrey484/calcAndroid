@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.andrey.kal.Const.*;
 
@@ -70,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         zero.setOnClickListener(v -> textInput("0"));
         point.setOnClickListener(v -> textInput("."));
         mool.setOnClickListener(v -> textInput("*"));
-        //
-        //
         seven.setOnClickListener(v -> textInput("7"));
         eight.setOnClickListener(v -> textInput("8"));
         nine.setOnClickListener(v -> textInput("9"));
@@ -92,17 +91,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void equal() {
-
+        parseSc();
     }
 
+
+
     public void textInput(String symbol) {
+
         expressionString = "";
                 for (int i = 0; i < constSymbol.length; i++) {
                     if (symbol.equals(constSymbol[i])) {
                         if (expression.size() < 1) {
                             return;
                         } else {
-                            if (check(expression.get(expression.size() - 1)) || expression.get(expression.size() - 1).equals(MINUS))
+                            if (check(expression.get(expression.size() - 1)) || expression.get(expression.size() - 1).equals(MINUS) ||expression.get(expression.size()-1).equals(POINT))
                                 return;
 
                         }
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                         try {
-                            if (expression.get(expression.size() - 2).equals(MINUS) && expression.get(expression.size() - 1).equals(MINUS) || check(expression.get(expression.size() - 2)))
+                            if (expression.get(expression.size() - 2).equals(MINUS) && expression.get(expression.size() - 1).equals(MINUS) || check(expression.get(expression.size() - 2))||expression.get(expression.size()-1).equals(POINT))
                                 return;
                         } catch (Exception e) {
 
@@ -122,6 +124,29 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+                if(symbol.equals(POINT)){
+                    if(expression.size()==0)
+                        return;
+                    else {
+                        if(check(expression.get(expression.size()-1))||expression.get(expression.size()-1).equals(POINT)
+                                ||expression.get(expression.size()-1).equals(MINUS))
+                            return;
+                    }
+                }
+                if(expression.size()>1){
+                    if(expression.get(expression.size()-1).equals(MINUS)&&symbol.equals(MINUS)) {
+                        expression.remove(expression.size() - 1);
+                        symbol = PLUS;
+                    }
+                    if(expression.get(expression.size()-1).equals(PLUS)&&symbol.equals(MINUS)) {
+                        expression.remove(expression.size() - 1);
+                        symbol = MINUS;
+                    }
+                    if(expression.get(expression.size()-1).equals(MINUS)&&symbol.equals(PLUS)) {
+                        expression.remove(expression.size() - 1);
+                        symbol = MINUS;
+                    }
+                }
                 expression.add(symbol);
 
 
@@ -142,6 +167,12 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return false;
+    }
+
+    private void parseSc() {
+        for(int i = 0;i<expressionString.length();i++){
+            
+        }
     }
 
 }
